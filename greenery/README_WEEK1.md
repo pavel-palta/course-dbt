@@ -9,7 +9,7 @@ Answer: **130 users**.
   
 </br>
   
-```
+```sql
 select
   count(distinct user_id) as count_users
 
@@ -42,7 +42,7 @@ Answer: **7.520833 orders** or, if rounded with no remainder, **8 orders**.
   
 </br>
   
-```
+```sql
 with 
   
   orders_hourly as (
@@ -90,7 +90,7 @@ Answer: **336252 seconds**. It is **3 days**, **21 hour**, **24 minutes**, **12 
   
 </br>
   
-```
+```sql
 with 
   
   orders_extended as (
@@ -139,7 +139,7 @@ Answer: **25 users** with **1 purchase**, **28 users** with **2 purchases** and 
   
 </br>
   
-```
+```sql
 with 
 
   user_orders as (
@@ -197,7 +197,7 @@ Answer: **16.327586 sessions** or, if rounded with no remainder, **16 sessions**
 
 </br>
   
-```
+```sql
 with 
 
   events_hourly as (
