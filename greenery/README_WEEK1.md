@@ -157,9 +157,9 @@ with
 
 select
   case count_orders
-    when 1 then 1
-    when 2 then 2
-    else 3
+    when 1 then '1'
+    when 2 then '2'
+    else '3+'
   end as cohort_orders,
   count(distinct user_id) as count_users
   
@@ -181,7 +181,7 @@ order by 1 asc
 | ------------- | ----------- |
 | 1             | 25          |
 | 2             | 28          |
-| 3             | 71          |
+| 3+            | 71          |
   
 </details>
 
