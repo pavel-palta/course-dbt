@@ -1,4 +1,4 @@
-## Week 1
+## Week 1 Project
 #### 1. How many users do we have?
 
 Answer: **130 users**.
@@ -30,7 +30,7 @@ from dev_db.dbt_pavelfilatovpaltacom.stg_postgres__users
   
 </details>
 
-</br>
+#
 
 #### 2. On average, how many orders do we receive per hour?
 
@@ -79,10 +79,10 @@ from orders_hourly
   
 </details>
 
-</br>
+#
 
 #### 3. On average, how long does an order take from being placed to being delivered?
-Answer: **336252 seconds**. It is **3 days**, **21 hour**, **24 minutes**, **12 seconds** from being placed to being delivered
+Answer: **336252 seconds**. It is **3 days**, **21 hour**, **24 minutes**, **12 seconds** from being placed to being delivered.
 
 <details>
   
@@ -127,7 +127,7 @@ from orders_extended
   
 </details>
 
-</br>
+#
 
 #### 4. How many users have only made one purchase? Two purchases? Three+ purchases?
 
@@ -185,7 +185,7 @@ order by 1 asc
   
 </details>
 
-</br>
+#
 
 #### 5. On average, how many unique sessions do we have per hour?
 
