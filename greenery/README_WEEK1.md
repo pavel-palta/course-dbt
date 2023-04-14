@@ -43,7 +43,9 @@ Answer: **7.520833 orders** or, if rounded with no remainder, **8 orders**.
 </br>
   
 ```
-with orders_hourly as (
+with 
+  
+  orders_hourly as (
 
     select
       date_trunc(hour, created_at) as created_hour,
@@ -54,7 +56,7 @@ with orders_hourly as (
     group by 1
     order by 1 desc
 
-)
+  )
 
 select
   avg(count_orders) as average_orders_hourly,
@@ -80,7 +82,7 @@ from orders_hourly
 </br>
 
 #### 3. On average, how long does an order take from being placed to being delivered?
-Answer: **answer**.
+Answer: **336252 seconds**. It is **3 days**, **21 hour**, **24 minutes**, **12 seconds** from being placed to being delivered
 
 <details>
   
@@ -89,7 +91,26 @@ Answer: **answer**.
 </br>
   
 ```
-query
+with 
+  
+  orders_extended as (
+
+    select
+      *,
+      timediff(second, created_at, delivered_at) as diff_c_d_seconds
+    
+    from dev_db.dbt_pavelfilatovpaltacom.stg_postgres__orders
+
+  )
+
+select
+  round(avg(diff_c_d_seconds), 0) as average_diff_c_d_seconds,
+  floor(average_diff_c_d_seconds / 86400) as average_diff_c_d_full_days,
+  floor((average_diff_c_d_seconds % 86400) / 3600) as average_diff_c_d_full_hours,
+  floor((average_diff_c_d_seconds % 3600) / 60) as average_diff_c_d_full_minutes,
+  (average_diff_c_d_seconds % 60) as average_diff_c_d_full_seconds
+
+from orders_extended
 ```
   
 </details>
@@ -100,7 +121,9 @@ query
   
 </br>
   
-table
+| AVERAGE_DIFF_C_D_SECONDS | AVERAGE_DIFF_C_D_FULL_DAYS | AVERAGE_DIFF_C_D_FULL_HOURS | AVERAGE_DIFF_C_D_FULL_MINUTES | AVERAGE_DIFF_C_D_FULL_SECONDS |
+| ------------------------ | -------------------------- | --------------------------- | ----------------------------- | ----------------------------- |
+| 336252                   | 3                          | 21                          | 24                            | 12                            |
   
 </details>
 
@@ -117,7 +140,9 @@ Answer: **25 users** with **1 purchase**, **28 users** with **2 purchases** and 
 </br>
   
 ```
-with user_orders as (
+with 
+
+  user_orders as (
 
     select
       user_id,
@@ -128,7 +153,7 @@ with user_orders as (
     group by 1
     order by 1 asc
 
-)
+  )
 
 select
   case count_orders
@@ -173,7 +198,9 @@ Answer: **16.327586 sessions** or, if rounded with no remainder, **16 sessions**
 </br>
   
 ```
-with events_hourly as (
+with 
+
+  events_hourly as (
 
     select
       date_trunc(hour, created_at) as created_hour,
@@ -185,11 +212,12 @@ with events_hourly as (
     group by 1
     order by 1 desc
 
-)
+  )
 
 select
   avg(count_sessions) as average_sessions_hourly,
   round(average_sessions_hourly, 0) as average_sessions_hourly_rounded_0
+
 from events_hourly
 ```
   
