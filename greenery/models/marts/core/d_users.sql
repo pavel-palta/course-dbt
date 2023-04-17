@@ -13,6 +13,7 @@ select
   uo.is_returning_user,
   uo.cohort_orders,
   uo.total_order_revenue,
+  uo.average_order_revenue,
   uo.orders_discounted as total_orders_discounted,
   uo.average_ordered_products,
   uo.average_ordered_units,
