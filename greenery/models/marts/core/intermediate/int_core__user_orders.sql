@@ -13,6 +13,7 @@ select
     when 2 then '2'
     else '3+'
   end as cohort_orders,
+  sum(order_revenue) as total_order_revenue,
   round(div0(sum(total_products), total_orders), 2) as average_ordered_products,
   round(div0(sum(total_units), total_orders), 2) as average_ordered_units,
   count(distinct iff(is_discounted, order_id, null)) as orders_discounted,
