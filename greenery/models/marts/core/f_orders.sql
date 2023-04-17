@@ -11,6 +11,8 @@ select
   o.order_revenue,
   o.promo,
   o.is_discounted,
+  o.order_id = first_value(o.order_id) over (partition by user_id order by o.created_at asc) as is_first_user_order,
+  o.order_id = last_value(o.order_id) over (partition by user_id order by o.created_at asc) as is_last_user_order,
   p.amount_discount as order_discount,
   op.products,
   op.total_products,
