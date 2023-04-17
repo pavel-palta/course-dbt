@@ -11,9 +11,10 @@
 ### Q&A
 
 #### 1. What is our user repeat rate?
-###### Repeat Rate = Users who purchased 2 or more times / users who purchased
 
 Answer: **79.8387%** or, if rounded with no remainder, **80%**.
+
+###### Repeat Rate = Users who purchased 2 or more times / users who purchased
 
 <details>
   
@@ -63,7 +64,18 @@ from user_orders
 
 #### 2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
 
-###### This is a hypothetical question vs. something we can analyze in our Greenery data set. Think about what exploratory analysis you would do to approach this question.
+There are 4 hypotesis I have generated on indicators of users who will likely purchase again.
+- Delivery time
+- Some product which makes great experience
+- Discounts and promotions
+- Products variety
+
+If I had more data I would look into:
+- Quality of the product: if we had systems like Trustpilot or Zendesk we could analyse data on customer feedback regarding our products;
+- Competitors' Prices: if there was an additional dataset on competotors with similar product portfolio we could compare our products pricewise and see how often the products with less competitive offer is ordered;
+- Web analytics: to analyse overall shopping experience, clicks to purchase steps, loading times of the pages, quality of the content;
+- Social media engagement and CRM: how we engage existing users, build relationship with the customers, what we offer and how we encourage to make another purchase.
+
 
 #### 3. What are daily page views by product? Daily orders by product? What’s getting a lot of traffic, but maybe not converting into purchases
 
