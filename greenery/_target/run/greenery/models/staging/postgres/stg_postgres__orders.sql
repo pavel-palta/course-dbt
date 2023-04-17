@@ -1,8 +1,8 @@
-{{
-  config(
-    enabled=true
-  )
-}}
+
+  create or replace   view dev_db.dbt_pavelfilatovpaltacom.stg_postgres__orders
+  
+   as (
+    
 
 select 
   order_id,
@@ -19,4 +19,6 @@ select
   estimated_delivery_at,
   delivered_at
 
-from {{ source('postgres', 'orders') }}
+from raw.public.orders
+  );
+

@@ -1,8 +1,4 @@
-{{
-  config(
-    enabled=true
-  )
-}}
+
 
 select 
   event_id,
@@ -14,4 +10,4 @@ select
   created_at,
   page_url
 
-from {{ source('postgres', 'events') }}
+from raw.public.events

@@ -1,8 +1,4 @@
-{{
-  config(
-    enabled=true
-  )
-}}
+
 
 select 
   order_id,
@@ -19,4 +15,4 @@ select
   estimated_delivery_at,
   delivered_at
 
-from {{ source('postgres', 'orders') }}
+from raw.public.orders

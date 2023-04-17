@@ -1,8 +1,4 @@
-{{
-  config(
-    enabled=true
-  )
-}}
+
 
 select 
   user_id,
@@ -14,4 +10,4 @@ select
   created_at,
   updated_at
 
-from {{ source('postgres', 'users') }}
+from raw.public.users
