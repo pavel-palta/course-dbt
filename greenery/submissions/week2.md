@@ -64,13 +64,16 @@ from user_orders
 
 #### 2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
 
-There are 4 hypotesis I have generated on indicators of users who will likely purchase again.
-- Delivery time
+There are 4 indicators of users who will likely purchase again I have discovered:
+- Delivered in time: if first order was delivered in time there is 
 - Some product which makes great experience
 - Discounts and promotions
 - Products variety
 
-If I had more data I would look into:
+And are 4 indicators of users who will likely not purchase again I have discovered:
+- First order not delivered in time: 
+
+**If I had more data I would look into:**
 - Quality of the product: if we had systems like Trustpilot or Zendesk we could analyse data on customer feedback regarding our products;
 - Competitors' Prices: if there was an additional dataset on competotors with similar product portfolio we could compare our products pricewise and see how often the products with less competitive offer is ordered;
 - Web analytics: to analyse overall shopping experience, clicks to purchase steps, loading times of the pages, quality of the content;
