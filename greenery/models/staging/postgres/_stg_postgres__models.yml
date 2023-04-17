@@ -3,22 +3,22 @@ version: 2
 models:
 
   - name: stg_postgres__addresses
-    description: Data on addresses
+    description: 'User addresses: country, state, zipcode, address'
 
   - name: stg_postgres__events
-    description: Data on events
+    description: 'Web events: event type, event time, URL, user ID, product ID'
 
   - name: stg_postgres__order_items
-    description: Data on order items
+    description: 'Ordered items: order ID, product ID and quantity ordered'
 
   - name: stg_postgres__orders
-    description: Data on orders
+    description: 'Purchases: status, promocode applied, shipping cost, shipping provider, tracking ID, delivery time'
 
   - name: stg_postgres__products
-    description: Data on products
+    description: 'Product inventory: quantity, price, product name'
 
   - name: stg_postgres__promos
-    description: Data on promos
+    description: 'Pomocodes: status, discount'
 
   - name: stg_postgres__users
-    description: Data on users
+    description: 'User account: email, phone, first and last names'

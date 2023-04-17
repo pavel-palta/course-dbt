@@ -1,0 +1,6 @@
+version: 2
+
+models:
+
+  - name: d_users
+    description: 'Data on users: purchases'

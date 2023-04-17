@@ -1,3 +1,6 @@
-# version: 2
+version: 2
 
-# models:
+models:
+
+  - name: int_core__user_orders
+    description: 'Data on purchasing users and their order activity'

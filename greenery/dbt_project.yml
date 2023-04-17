@@ -29,3 +29,5 @@ models:
   greenery:
     staging:
       +materialized: view
+    marts:
+      +materialized: table

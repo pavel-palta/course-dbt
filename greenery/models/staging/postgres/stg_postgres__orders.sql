@@ -17,6 +17,8 @@ select
   shipping_cost,
   created_at,
   estimated_delivery_at,
-  delivered_at
+  delivered_at,
+  delivered_at < estimated_delivery_at as is_delivered_in_time,
+  timediff(second, created_at, delivered_at) as diff_c_d_seconds
 
 from {{ source('postgres', 'orders') }}
