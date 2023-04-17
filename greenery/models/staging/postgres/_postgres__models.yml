@@ -1,6 +1,7 @@
 version: 2
 
 models:
+
   - name: stg_postgres__addresses
     description: Data on addresses
 

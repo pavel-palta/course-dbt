@@ -6,10 +6,10 @@ sources:
     schema: public
     database: raw
 
-    # quoting:
-    #   database: false
-    #   schema: false
-    #   identifier: false
+    quoting:
+      database: false
+      schema: false
+      identifier: false
 
     tables:
       - name: addresses
