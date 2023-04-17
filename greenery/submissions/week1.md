@@ -1,4 +1,21 @@
-## Week 1 Project
+## Week 1
+
+### Project setup
+
+#### • [Core project folder](https://github.com/pavel-palta/course-dbt/tree/main/greenery)
+
+### First models
+
+#### • [Staging models on postgres](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/staging/postgres)
+
+### Snapshot
+
+#### • [Snapshot on products inventory](https://github.com/pavel-palta/course-dbt/blob/main/greenery/snapshots/sst_postgres__products.sql)
+
+#
+
+### Q&A
+
 #### 1. How many users do we have?
 
 Answer: **130 users**.
