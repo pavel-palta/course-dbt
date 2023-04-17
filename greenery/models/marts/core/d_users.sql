@@ -8,9 +8,14 @@ select
   u.user_id,
   a.country,
   a.state,
+  a.zip,
+  uo.total_orders,
+  uo.is_returning_user,
   uo.cohort_orders,
-  uo.orders,
-  uo.orders_in_time,
+  uo.orders_discounted as total_orders_discounted,
+  uo.average_ordered_products,
+  uo.average_ordered_units,
+  uo.orders_delivered_in_time,
   uo.average_delivery_days
 
 from {{ ref('stg_postgres__users') }} as u

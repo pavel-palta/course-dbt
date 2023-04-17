@@ -7,6 +7,6 @@
 select 
   order_id,
   product_id,
-  quantity
+  quantity as units
 
 from {{ source('postgres', 'order_items') }}

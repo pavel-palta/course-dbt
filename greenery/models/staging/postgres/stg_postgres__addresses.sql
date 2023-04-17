@@ -9,6 +9,6 @@ select
   address,
   country,
   state,
-  zipcode
+  zipcode as zip
 
 from {{ source('postgres', 'addresses') }}

@@ -6,19 +6,22 @@
 
 select
   user_id,
-  count(distinct order_id) as orders,
-  case orders
+  count(distinct order_id) as total_orders,
+  iff(total_orders > 1, true, false) as is_returning_user,
+  case total_orders
     when 1 then '1'
     when 2 then '2'
     else '3+'
   end as cohort_orders,
-  count(distinct iff(is_delivered_in_time, order_id, null)) as orders_in_time,
-  round(avg(diff_c_d_seconds) / 86400, 2) as average_delivery_days,
+  round(div0(sum(total_products), total_orders), 2) as average_ordered_products,
+  round(div0(sum(total_units), total_orders), 2) as average_ordered_units,
+  count(distinct iff(is_discounted, order_id, null)) as orders_discounted,
+  count(distinct iff(is_delivered_in_time, order_id, null)) as orders_delivered_in_time,
+  round(avg(delivery_days), 2) as average_delivery_days,
   min(created_at) as first_order_at,
-  max(created_at) as last_order_at,
-  iff(orders > 1, true, false) as is_returning_user
+  max(created_at) as last_order_at
 
-from {{ ref('stg_postgres__orders') }}
+from {{ ref('f_orders') }}
 
 group by 1
 order by 1 asc
