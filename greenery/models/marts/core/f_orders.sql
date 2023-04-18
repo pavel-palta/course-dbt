@@ -4,19 +4,12 @@
   )
 }}
 
-select 
+select
   o.order_id,
   o.user_id,
   o.status,
   o.order_revenue,
-  o.promo,
   o.is_discounted,
-  o.order_id = first_value(o.order_id) over (partition by user_id order by o.created_at asc) as is_first_user_order,
-  o.order_id = last_value(o.order_id) over (partition by user_id order by o.created_at asc) as is_last_user_order,
-  p.amount_discount as order_discount,
-  op.products,
-  op.total_products,
-  op.total_units,
   o.order_cost,
   o.shipping_cost,
   o.shipping_service,
@@ -27,13 +20,9 @@ select
   o.estimated_at,
   o.delivered_at,
   o.estimated_days,
-  o.delivery_days,
-  o.is_delivered_in_time
+  o.delivery_days
 
 from {{ ref('stg_postgres__orders') }} as o
-left join {{ ref('stg_postgres__promos') }} as p
-  on o.promo = p.promo
 left join {{ ref('stg_postgres__addresses') }} as a
   on o.address_id = a.address_id
-left join {{ ref('int_core__order_products') }} as op
-  on o.order_id = op.order_id
+  

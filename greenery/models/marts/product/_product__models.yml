@@ -1,3 +1,6 @@
-# version: 2
+version: 2
 
-# models:
+models:
+
+  - name: f_page_views
+    description: 'Page view events from the website'

@@ -1,3 +1,5 @@
-# version: 2
+version: 2
 
-# models:
+models:
+  - name: f_promo_orders
+    description: 'Orders with promocodes and discounts'
