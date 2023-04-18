@@ -1,3 +1,5 @@
-# version: 2
+version: 2
 
-# models:
+models:
+  - name: int_product__page_views
+    description: 'Intermadiate table with page view events and supportive data'

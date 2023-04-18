@@ -7,6 +7,7 @@
 select
   product_id,
   product,
-  price
+  order_id,
+  ordered_at
 
-from {{ ref('stg_postgres__products') }}
+from {{ ref('int_core__product_orders') }}

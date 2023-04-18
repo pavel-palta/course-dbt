@@ -3,7 +3,4 @@ version: 2
 models:
 
   - name: f_page_views
-    description: 'Page view events from the website'
-
-  - name: f_product_orders
-    description: 'Data on products ordered'
+    description: 'Page view events (product views) from the website'

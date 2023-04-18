@@ -1,3 +1,12 @@
-# version: 2
+version: 2
 
-# models:
+models:
+
+  - name: int_core__orders
+    description: 'Intermediate table with joins on orders'
+
+  - name: int_core__users
+    description: 'Intermediate table with joins on users'
+
+  - name: int_core__product_orders
+    description: 'Intermediate table with joins on products'

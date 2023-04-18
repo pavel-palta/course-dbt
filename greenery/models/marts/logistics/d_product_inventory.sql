@@ -7,6 +7,6 @@
 select
   product_id,
   product,
-  price
+  inventory
 
 from {{ ref('stg_postgres__products') }}

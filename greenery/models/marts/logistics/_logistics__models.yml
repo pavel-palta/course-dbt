@@ -1,0 +1,9 @@
+version: 2
+
+models:
+
+  - name: f_delayed_orders
+    description: 'Orders which have been delivered with a delay'
+
+  - name: d_product_inventory
+    description: 'Product amounts left'

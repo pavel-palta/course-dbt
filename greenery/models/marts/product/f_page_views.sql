@@ -5,17 +5,11 @@
 }}
 
 select
-  e.event_id,
-  e.session_id,
-  e.user_id,
-  e.product_id,
-  e.created_at,
-  p.product
+  event_id,
+  session_id,
+  user_id,
+  product_id,
+  created_at,
+  product
 
-from {{ ref('stg_postgres__events') }} as e
-left join {{ ref('stg_postgres__products') }} as p
-  on e.product_id = p.product_id
-
-where e.event_type = 'page_view'
-
-order by e.created_at desc
+from {{ ref('int_product__page_views') }}

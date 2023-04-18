@@ -2,8 +2,14 @@ version: 2
 
 models:
 
+  - name: d_products
+    description: 'Products portfolio'
+  
   - name: d_users
     description: 'Data on users: coutry, orders, '
 
   - name: f_orders
     description: 'Data on orders: purchases'
+
+  - name: f_product_orders
+    description: 'Data on products ordered'
