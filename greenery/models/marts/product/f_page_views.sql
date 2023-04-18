@@ -1,23 +1,21 @@
 {{
   config(
-    enabled=true,
-    materialized='incremental'
+    enabled=true
   )
 }}
 
 select
-  event_id,
-  session_id,
-  user_id,
-  product_id,
-  created_at
+  e.event_id,
+  e.session_id,
+  e.user_id,
+  e.product_id,
+  e.created_at,
+  p.product
 
-from {{ ref('stg_postgres__events') }}
+from {{ ref('stg_postgres__events') }} as e
+left join {{ ref('stg_postgres__products') }} as p
+  on e.product_id = p.product_id
 
-where 
-  event_type = 'page_view'
-  {% if is_incremental() %}
-  and created_at > (select max(created_at) from {{ this }})
-  {% endif %}
+where e.event_type = 'page_view'
 
-order by created_at desc
+order by e.created_at desc
