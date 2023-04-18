@@ -68,6 +68,7 @@ from user_orders
 
 Some hypothetical indicators of a user who will likely purchase again:
 - The deliveries come in time, within estimated delivery time;
+- Time spent on the website as an indicator of interest and frequency of visits (sessions);
 - The user has a promocode (though, in our dataset we can only see if the promocode was used).
 
 Some hypothetical indicators of a user who will likely NOT purchase again:
