@@ -101,19 +101,290 @@ If I had more data I would look into:
 
 ###### We might want to know how different products perform. What are daily page views by product? Daily orders by product? What’s getting a lot of traffic, but maybe not converting into purchases?
 
+See [f_page_views](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/product/f_page_views.sql) model.
+
+Daily average views by product:
+
+<details>
+  
+<summary>Query</summary>
+
+```sql
+with 
+
+daily_views_product as (
+
+  select
+    product,
+    date(created_at) as report_date,
+    count(distinct event_id) as views
+  
+  from dev_db.dbt_pavelfilatovpaltacom.f_page_views
+
+  group by 1, 2
+  order by 2 desc, 1 asc
+
+)
+
+select
+  product,
+  avg(views) as average_views
+  
+from daily_views_product
+
+where 
+  report_date = '2021-02-11' or 
+  report_date = '2021-02-10'
+
+group by 1
+order by 2 desc
+```
+  
+</details>
+
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+  
+| PRODUCT                | AVERAGE_VIEWS |
+| ---------------------- | ------------- |
+| Birds Nest Fern        | 40            |
+| Pink Anthurium         | 37            |
+| Orchid                 | 37            |
+| Snake Plant            | 36.5          |
+| Ponytail Palm          | 35            |
+| Majesty Palm           | 34.5          |
+| Bamboo                 | 34.5          |
+| Peace Lily             | 33.5          |
+| Ficus                  | 33.5          |
+| String of pearls       | 32.5          |
+| Aloe Vera              | 32.5          |
+| ZZ Plant               | 32.5          |
+| Arrow Head             | 32            |
+| Pothos                 | 32            |
+| Boston Fern            | 31.5          |
+| Philodendron           | 31.5          |
+| Dragon Tree            | 31            |
+| Angel Wings Begonia    | 30.5          |
+| Pilea Peperomioides    | 30            |
+| Spider Plant           | 29.5          |
+| Fiddle Leaf Fig        | 29.5          |
+| Bird of Paradise       | 29.5          |
+| Money Tree             | 28            |
+| Rubber Plant           | 28            |
+| Cactus                 | 27            |
+| Alocasia Polly         | 27            |
+| Calathea Makoyana      | 26            |
+| Monstera               | 24.5          |
+| Jade Plant             | 23            |
+| Devil's Ivy            | 22.5          |
+  
+</details>
+
+We are only taking 2 days from the whole table with events since for other dates the data is unsufficient and we can ignore it.
+
+Daily orders by product:
+
+<details>
+  
+<summary>Query</summary>
+
+```sql
+with 
+
+daily_product_orders as (
+
+  select
+    product,
+    date(ordered_at) as report_date,
+    count(distinct order_id) as orders
+  
+  from dev_db.dbt_pavelfilatovpaltacom.f_product_orders
+
+  group by 1, 2
+  order by 2 desc, 1 asc
+
+)
+
+select
+  product,
+  avg(orders) as average_orders
+
+from daily_product_orders
+
+group by 1
+order by 2 desc
+```
+  
+</details>
+
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+
+| PRODUCT                | AVERAGE_ORDERS |
+| ---------------------- | -------------- |
+| String of pearls       | 19.5           |
+| Bamboo                 | 18             |
+| Arrow Head             | 17.5           |
+| Orchid                 | 17             |
+| ZZ Plant               | 17             |
+| Birds Nest Fern        | 16.5           |
+| Majesty Palm           | 16.5           |
+| Aloe Vera              | 16             |
+| Pink Anthurium         | 15.5           |
+| Cactus                 | 15             |
+| Philodendron           | 15             |
+| Snake Plant            | 14.5           |
+| Ficus                  | 14.5           |
+| Dragon Tree            | 14.5           |
+| Pilea Peperomioides    | 14             |
+| Rubber Plant           | 14             |
+| Ponytail Palm          | 14             |
+| Spider Plant           | 14             |
+| Fiddle Leaf Fig        | 14             |
+| Bird of Paradise       | 13.5           |
+| Peace Lily             | 13.5           |
+| Calathea Makoyana      | 13.5           |
+| Money Tree             | 13             |
+| Boston Fern            | 13             |
+| Monstera               | 12.5           |
+| Angel Wings Begonia    | 12             |
+| Devil's Ivy            | 11             |
+| Jade Plant             | 11             |
+| Pothos                 | 10.5           |
+| Alocasia Polly         | 10.5           |
+
+</details>
+
+Now let's combine these two queries and take top-10 most viewed products to compare what's their view to order ratio:
+
+<details>
+  
+<summary>Query</summary>
+
+```sql
+with 
+
+daily_views_product as (
+
+  select
+    product,
+    date(created_at) as report_date,
+    count(distinct event_id) as views
+  
+  from dev_db.dbt_pavelfilatovpaltacom.f_page_views
+
+  group by 1, 2
+  order by 2 desc, 1 asc
+
+),
+
+average_product_views as (
+
+  select
+    product,
+    avg(views) as average_views
+  
+  from daily_views_product
+
+  where 
+    report_date = '2021-02-11' or 
+    report_date = '2021-02-10'
+
+  group by 1
+  order by 2 desc
+
+  limit 10
+
+),
+
+daily_product_orders as (
+
+  select
+    product,
+    date(ordered_at) as report_date,
+    count(distinct order_id) as orders
+  
+  from dev_db.dbt_pavelfilatovpaltacom.f_product_orders
+
+  group by 1, 2
+  order by 2 desc, 1 asc
+
+),
+
+average_product_orders as (
+
+select
+  product,
+  avg(orders) as average_orders
+
+from daily_product_orders
+
+group by 1
+order by 2 desc
+
+)
+
+select
+  v.product,
+  v.average_views,
+  concat(round(div0(o.average_orders, v.average_views)*100), ' %') as rate_order_views
+
+from average_product_views as v
+left join average_product_orders as o
+  on v.product = o.product
+
+order by 3 asc
+```
+  
+</details>
+  
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+
+| PRODUCT             | AVERAGE_VIEWS | RATE_ORDER_VIEWS |
+| ------------------- | ------------- | ----------------- |
+| Snake Plant         | 36.5          | 40%               |
+| Ponytail Palm       | 35            | 40%               |
+| Peace Lily          | 33.5          | 40%               |
+| Birds Nest Fern     | 40            | 41%               |
+| Pink Anthurium      | 37            | 42%               |
+| Ficus               | 33.5          | 43%               |
+| Orchid              | 37            | 46%               |
+| Majesty Palm        | 34.5          | 48%               |
+| Bamboo              | 34.5          | 52%               |
+| ZZ Plant            | 32.5          | 52%               |
+
+</details>
+
+So we can conclude that Snake Plant, Ponytail Palm and Peace Lily are least performant between the top-viewed products
+
 #
 
-#### 6. For example, some “core” datasets could include fact_orders, dim_products, and dim_users
+#### 6. Core datasets could include fact_orders, dim_products, and dim_users.
+
+• [f_orders](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/core/f_orders.sql)
+
+• [d_products](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/core/d_products.sql)
+
+• [d_users](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/core/d_users.sql)
+
 
 #
 
-#### 7. Core datasets could include fact_orders, dim_products, and dim_users
-
-#
-
-#### 8. The marketing mart could contain a model like user_order_facts which contains order information at the user level
+#### 7. The marketing mart could contain a model like user_order_facts which contains order information at the user level
 
 ###### For those who are less familiar with e-commerce and marketing, we might want to dig into users — when was their first order? Last order? How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders
+
+
 
 #
 
@@ -121,7 +392,7 @@ If I had more data I would look into:
 
 #
 
-#### 10. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
+#### 9. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
 
 ---
 
