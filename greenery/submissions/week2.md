@@ -8,8 +8,6 @@
 
 ---
 
-### Q&A
-
 #### 1. What is our user repeat rate?
 
 Answer: **79.8387%** or, if rounded with no remainder, **80%**.
@@ -62,68 +60,73 @@ from user_orders
   
 </details>
 
+#
+
 #### 2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
 
-There are 4 indicators of users who will likely purchase again I have discovered:
-- Delivered in time: if first order was delivered in time there is 
-- Some product which makes great experience
-- Discounts and promotions
-- Products variety
+###### This is a hypothetical question vs. something we can analyze in our Greenery data set. Think about what exploratory analysis you would do to approach this question.
 
-And are 4 indicators of users who will likely not purchase again I have discovered:
-- First order not delivered in time: 
+Some hypothetical indicators of a user who will likely purchase again:
+- The deliveries come in time, within estimated delivery time;
+- The user has a promocode (though, in our dataset we can only see if the promocode was used).
 
-**If I had more data I would look into:**
+Some hypothetical indicators of a user who will likely NOT purchase again:
+- The product which the user wants to order is not in the inventory;
+- The deliveries come with delays, after estimated delivery time.
+
+If I had more data I would look into:
 - Quality of the product: if we had systems like Trustpilot or Zendesk we could analyse data on customer feedback regarding our products;
-- Competitors' Prices: if there was an additional dataset on competotors with similar product portfolio we could compare our products pricewise and see how often the products with less competitive offer is ordered;
-- Web analytics: to analyse overall shopping experience, clicks to purchase steps, loading times of the pages, quality of the content;
+- Competitors' Prices: if there was an additional dataset on competotors with similar product portfolio we could compare our products pricewise;
 - Social media engagement and CRM: how we engage existing users, build relationship with the customers, what we offer and how we encourage to make another purchase.
 
+#
 
-#### 3. What are daily page views by product? Daily orders by product? What’s getting a lot of traffic, but maybe not converting into purchases
+#### 3. Creating Marts Folder
+
+• [Marts Folder with Business Units](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts)
 
 #
 
-### Creating Marts Folder
+#### 4. Intermediate and Dim/Fact Models
 
-#### [• Marts Folder with Business Units](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts)
+• [Product](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/product)
+
+• [Core](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/core)
+
+• [Marketing](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/marketing)
+
+#
+
+#### 5. The product mart could contain a model like fact_page_views which contains all page view events from greenery’s events data
+
+###### We might want to know how different products perform. What are daily page views by product? Daily orders by product? What’s getting a lot of traffic, but maybe not converting into purchases?
 
 #
 
-### Intermediate and Dim/Fact Models
-
-#### • [Product](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/product)
-#### • [Core](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/core)
-#### • [Marketing](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/marketing)
+#### 6. For example, some “core” datasets could include fact_orders, dim_products, and dim_users
 
 #
+
+#### 7. Core datasets could include fact_orders, dim_products, and dim_users
+
+#
+
+#### 8. The marketing mart could contain a model like user_order_facts which contains order information at the user level
+
+###### For those who are less familiar with e-commerce and marketing, we might want to dig into users — when was their first order? Last order? How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders
+
+#
+
+#### 9. Explain the product mart models you added. Why did you organize the models in the way you did?
+
+#
+
+#### 10. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
 
 ---
-
-### Product Mart
-
-#### • Page Views Events
-
-### Core Mart
-
-#### • Fact Orders
-#### • Dim Products
-#### • Dim Users
-
-### Marketing Mart
-
-#### • Fact User Order
-
-### Visual representation of DAGs from dbt docs
-
-#
-
-#### 4. When was their first order? Last order? How many orders have they made? Total spend?
 
 ### Part 2. Tests
 
 ---
 
 ### Part 3. Snapshots
-
----
