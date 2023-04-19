@@ -389,7 +389,7 @@ So we can conclude that Snake Plant, Ponytail Palm and Peace Lily are least perf
 
 ###### For those who are less familiar with e-commerce and marketing, we might want to dig into users — when was their first order? Last order? How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders
 
-• [d_user_orders](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/marketing/d_user_orders.sql): there are first_order_at, last_order_at, total_orders, total_order_revenue attributes in the model.
+• [d_user_orders](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/marketing/d_user_orders.sql): there are first_order_at, last_order_at, total_orders, total_cost attributes in the model.
 
 #
 
