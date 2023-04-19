@@ -20,6 +20,7 @@ select
   a.country as delivery_country,
   a.state as delivery_state,
   a.zip as delivery_zip,
+  div0(o.order_revenue - o.order_cost - o.shipping_cost, o.order_revenue) as order_margin,
   o.created_at,
   o.estimated_at,
   o.delivered_at,

@@ -3,3 +3,6 @@ version: 2
 models:
   - name: f_promo_orders
     description: 'Orders with promocodes and discounts'
+
+  - name: d_user_orders
+    description: 'Data on purchasing users and their order activity'
