@@ -12,7 +12,7 @@
 
 Answer: **79.8387%** or, if rounded with no remainder, **80%**.
 
-###### Repeat Rate = Users who purchased 2 or more times / users who purchased
+###### Repeat Rate = Users who purchased 2 or more times / users who purchased.
 
 <details>
   
@@ -95,6 +95,10 @@ If I had more data I would look into:
 • [Core](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/core)
 
 • [Marketing](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/marketing)
+
+• [Logistics](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/logistics)
+
+• [Finance](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/finance)
 
 #
 
@@ -385,15 +389,29 @@ So we can conclude that Snake Plant, Ponytail Palm and Peace Lily are least perf
 
 ###### For those who are less familiar with e-commerce and marketing, we might want to dig into users — when was their first order? Last order? How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders
 
-
+• [d_user_orders](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/marketing/d_user_orders.sql): there are first_order_at, last_order_at, total_orders, total_order_revenue attributes in the model.
 
 #
 
 #### 9. Explain the product mart models you added. Why did you organize the models in the way you did?
 
+I have added 5 business lines in total:
+
+• **Core**: there we have 2 dim models on products and users, 2 fact models on orders and product orders. First 2 give us understanding on what we sell and who we sell to. The last two give answers on questions how well we sell and what's been sold best;
+
+• **Finance**: I haven't added anything there yet but I am thinking of getting advantage of costs data and put some data on our margins there;
+
+• **Logistics**: a dim model on product inventory which shows what products we have now and fact model on orders which have been delivered with delays;
+
+• **Marketing**: a dim model on users with aggregated data from orders, a dim model on promos and a fact model on orders which have a promocode;
+
+• **Product**: a fact model on page views which we can use to evaluate popularity of each procuct on our website.
+
 #
 
 #### 9. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
+
+![Week 2 DAG](dag_week2.png "Week 2 DAG")
 
 ---
 
