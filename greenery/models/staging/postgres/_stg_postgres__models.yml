@@ -4,21 +4,77 @@ models:
 
   - name: stg_postgres__addresses
     description: 'User addresses: country, state, zipcode, address'
+    columns:
+      - name: address_id
+        tests:
+          - unique
+          - not_null
 
   - name: stg_postgres__events
     description: 'Web events: event type, event time, URL, user ID, product ID'
+    columns:
+      - name: event_id
+        tests:
+          - unique
+          - not_null
 
   - name: stg_postgres__order_items
     description: 'Ordered items: order ID, product ID and quantity ordered'
+    columns:
+      - name: units
+        tests:
+        - dbt_utils.accepted_range:
+            min_value: 0
 
   - name: stg_postgres__orders
     description: 'Purchases: status, promocode applied, shipping cost, shipping provider, tracking ID, delivery time'
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: product_cost
+        tests:
+        - dbt_utils.accepted_range:
+            min_value: 0
+      - name: shipping_cost
+        tests:
+        - dbt_utils.accepted_range:
+            min_value: 0
 
   - name: stg_postgres__products
     description: 'Product inventory: quantity, price, product name'
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: inventory
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: price
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
 
   - name: stg_postgres__promos
     description: 'Pomocodes: status, discount'
+    columns:
+      - name: promo
+        tests:
+          - unique
+          - not_null
+      - name: amount_discount
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 50
 
   - name: stg_postgres__users
     description: 'User account: email, phone, first and last names'
+    columns:
+      - name: user_id
+        tests:
+          - unique
+          - not_null
