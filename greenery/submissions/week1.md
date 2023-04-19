@@ -65,7 +65,7 @@ with
   orders_hourly as (
 
     select
-      date_trunc(hour, created_at) as created_hour,
+      date_trunc(hour, ordered_at) as ordered_hour,
       count(distinct order_id) as count_orders
     
     from dev_db.dbt_pavelfilatovpaltacom.stg_postgres__orders
@@ -114,7 +114,7 @@ with
 
     select
       *,
-      timediff(second, created_at, delivered_at) as diff_c_d_seconds
+      timediff(second, ordered_at, delivered_at) as diff_c_d_seconds
     
     from dev_db.dbt_pavelfilatovpaltacom.stg_postgres__orders
 
