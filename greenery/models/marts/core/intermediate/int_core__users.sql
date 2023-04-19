@@ -7,7 +7,7 @@
 
 select
   u.user_id,
-  u.created_at,
+  u.registered_at,
   a.country,
   a.state,
   a.zip

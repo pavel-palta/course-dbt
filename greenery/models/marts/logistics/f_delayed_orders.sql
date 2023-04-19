@@ -13,7 +13,7 @@ select
   delivery_country,
   delivery_state,
   delivery_zip,
-  created_at,
+  ordered_at,
   estimated_at,
   delivered_at,
   estimated_days,

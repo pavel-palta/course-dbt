@@ -11,7 +11,7 @@ select
   last_name,
   email,
   phone_number,
-  created_at,
+  created_at as registered_at,
   updated_at
 
 from {{ source('postgres', 'users') }}

@@ -6,7 +6,7 @@
 
 select
   user_id,
-  created_at,
+  registered_at,
   country,
   state,
   zip

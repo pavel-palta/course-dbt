@@ -1,6 +1,10 @@
 version: 2
 
 models:
+
+  - name: d_promos
+    description: 'Data on promos we lauched for customers'
+
   - name: f_promo_orders
     description: 'Orders with promocodes and discounts'
 

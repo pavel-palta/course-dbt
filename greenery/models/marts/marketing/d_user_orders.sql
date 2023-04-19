@@ -6,10 +6,10 @@
 
 select
   user_id,
-  min(created_at) as first_order_at,
-  max(created_at) as last_order_at,
+  min(ordered_at) as first_order_at,
+  max(ordered_at) as last_order_at,
   count(distinct order_id) as total_orders,
-  sum(order_revenue) as total_order_revenue
+  sum(order_cost) as total_cost
 
 from {{ ref('f_orders') }}
 
