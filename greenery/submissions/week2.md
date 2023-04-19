@@ -437,18 +437,18 @@ And some custom tests:
 
 #### 1. Run the product snapshot model using dbt snapshot and query it in snowflake to see how the data has changed since last week.
 
-We can camparing the tables before the run and after the run the number of rows changed from 30 to 34. So 4 products have changed the inventory.
+Comparing the tables before the run and after the run the number of rows changed from 30 to 34. So 4 products have changed the inventory.
 
 
 #### 2. Which products had their inventory change from week 1 to week 2? 
 
-Pothos (40 -> 20), 
+• Pothos (40 -> 20), 
 
-Philodendron (51 -> 25), 
+• Philodendron (51 -> 25), 
 
-Monstera (77 -> 64), 
+• Monstera (77 -> 64), 
 
-String of pearls (58 -> 10)
+• String of pearls (58 -> 10)
 
 <details>
   
