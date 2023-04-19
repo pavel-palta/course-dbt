@@ -10,7 +10,7 @@
 
 #### 1. What is our user repeat rate?
 
-Answer: **79.8387%** or, if rounded with no remainder, **80%**.
+**79.8387%** or, if rounded with no remainder, **80%**.
 
 ###### Repeat Rate = Users who purchased 2 or more times / users who purchased.
 
@@ -370,7 +370,7 @@ order by 3 asc
 
 </details>
 
-So we can conclude that Snake Plant, Ponytail Palm and Peace Lily are least performant between the top-viewed products
+So we can conclude that Snake Plant, Ponytail Palm and Peace Lily are least performant between the top-viewed products.
 
 #
 
@@ -385,7 +385,7 @@ So we can conclude that Snake Plant, Ponytail Palm and Peace Lily are least perf
 
 #
 
-#### 7. The marketing mart could contain a model like user_order_facts which contains order information at the user level
+#### 7. The marketing mart could contain a model like user_order_facts which contains order information at the user level.
 
 ###### For those who are less familiar with e-commerce and marketing, we might want to dig into users — when was their first order? Last order? How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders
 
@@ -409,14 +409,103 @@ I have added 5 business lines in total:
 
 #
 
-#### 9. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
+#### 9. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense.
 
 ![Week 2 DAG](dag_week2.png "Week 2 DAG")
-
----
 
 ### Part 2. Tests
 
 ---
 
+#### 1. We added some more models and transformed some data! Now we need to make sure they’re accurately reflecting the data. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above.
+
+I have added these standard tests to my models:
+
+• **Staging models**: uniquness test and not null for the keys, range tests for some numeric values.
+
+• **Marts**: sdcsdc
+
+And some custom tests:
+
+• **Staging models**: sdsd
+
+• **Marts**: sdcsdc
+
 ### Part 3. Snapshots
+
+---
+
+#### 1. Run the product snapshot model using dbt snapshot and query it in snowflake to see how the data has changed since last week.
+
+We can camparing the tables before the run and after the run the number of rows changed from 30 to 34. So 4 products have changed the inventory.
+
+
+#### 2. Which products had their inventory change from week 1 to week 2? 
+
+Pothos (40 -> 20), 
+
+Philodendron (51 -> 25), 
+
+Monstera (77 -> 64), 
+
+String of pearls (58 -> 10)
+
+<details>
+  
+<summary>Query</summary>
+  
+</br>
+  
+```sql
+with 
+
+  new_inventory_values as (
+
+    select 
+      product, 
+      inventory
+
+    from dev_db.dbt_pavelfilatovpaltacom.sst_postgres__products
+
+    where dbt_valid_from >= '2023-04-19'
+
+  ),
+
+  old_inventory_values as (
+
+    select 
+      product, 
+      inventory
+
+    from dev_db.dbt_pavelfilatovpaltacom.sst_postgres__products
+
+    where dbt_valid_from < '2023-04-19'
+  
+  )
+
+select
+  n.product,
+  o.inventory as old_inventory,
+  n.inventory as new_inventory
+
+from new_inventory_values as n
+left join old_inventory_values as o
+  on n.product = o.product
+```
+  
+</details>
+
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+  
+| PRODUCT             | OLD_INVENTORY | NEW_INVENTORY |
+| ------------------- | ------------- | -------------- |
+| Pothos              | 40            | 20             |
+| Philodendron        | 51            | 25             |
+| Monstera            | 77            | 64             |
+| String of pearls    | 58            | 10             |
+  
+</details>
