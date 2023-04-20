@@ -370,7 +370,7 @@ order by 3 asc
 
 </details>
 
-So we can conclude that Snake Plant, Ponytail Palm and Peace Lily are least performant between the top-viewed products.
+So we can conclude that **Snake Plant**, **Ponytail Palm** and **Peace Lil**y are least performant between the top-viewed products.
 
 #
 
@@ -421,15 +421,13 @@ I have added 5 business lines in total:
 
 I have added these standard tests to my models:
 
-• **Staging models**: uniquness test and not null for the keys, range tests for some numeric values.
-
-• **Marts**: sdcsdc
+• **Staging models**: [uniquness test and not null for the keys, range tests](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/staging/postgres/_stg_postgres__models.yml) for some numeric values.
 
 And some custom tests:
 
-• **Staging models**: sdsd
+• **Staging models**: two test on events table which check if [order_id](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/events_order_id.sql) and [product_id](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/events_product_id.sql) are not null for certain event types, test for [orders staging table](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/no_promo_order_revenues.sql) on revenue check for non discounted orders.
 
-• **Marts**: sdcsdc
+• **Marts**: [f_orders table test](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/order_revenues.sql) on how revenue numbers match.
 
 ### Part 3. Snapshots
 
@@ -442,13 +440,13 @@ Comparing the tables before the run and after the run the number of rows changed
 
 #### 2. Which products had their inventory change from week 1 to week 2? 
 
-• Pothos (40 -> 20), 
+• Pothos (40 → 20), 
 
-• Philodendron (51 -> 25), 
+• Philodendron (51 → 25), 
 
-• Monstera (77 -> 64), 
+• Monstera (77 → 64), 
 
-• String of pearls (58 -> 10)
+• String of pearls (58 → 10)
 
 <details>
   
