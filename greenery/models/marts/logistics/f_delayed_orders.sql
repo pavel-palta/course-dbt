@@ -8,7 +8,7 @@ select
   order_id,
   user_id,
   order_status,
-  shipping_cost,
+  shipping_revenue,
   shipping_service,
   delivery_country,
   delivery_state,

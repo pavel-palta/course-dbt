@@ -4,6 +4,6 @@ from dev_db.dbt_pavelfilatovpaltacom.f_orders
 
 where 
   round(
-    order_cost + order_discount 
-     - product_cost - shipping_cost, 
+    order_revenue + order_discount 
+     - product_revenue - shipping_revenue, 
    2) != 0

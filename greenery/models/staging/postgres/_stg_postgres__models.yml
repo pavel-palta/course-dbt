@@ -36,17 +36,17 @@ models:
             min_value: 0
 
   - name: stg_postgres__orders
-    description: 'Purchases: status, promocode applied, shipping cost, shipping provider, tracking ID, delivery time'
+    description: 'Purchases: status, promocode applied, shipping revenue, shipping provider, tracking ID, delivery time'
     columns:
       - name: order_id
         tests:
           - unique
           - not_null
-      - name: product_cost
+      - name: product_revenue
         tests:
         - dbt_utils.accepted_range:
             min_value: 0
-      - name: shipping_cost
+      - name: shipping_revenue
         tests:
         - dbt_utils.accepted_range:
             min_value: 0
