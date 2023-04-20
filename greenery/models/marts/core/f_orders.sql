@@ -9,6 +9,7 @@ select
   user_id,
   order_status,
   order_cost,
+  order_discount,
   product_cost,
   shipping_cost,
   ordered_at,

@@ -17,6 +17,15 @@ models:
         tests:
           - unique
           - not_null
+      - name: session_id
+        tests:
+          - not_null
+      - name: user_id
+        tests:
+          - not_null
+      - name: page_url
+        tests:
+          - not_null
 
   - name: stg_postgres__order_items
     description: 'Ordered items: order ID, product ID and quantity ordered'
