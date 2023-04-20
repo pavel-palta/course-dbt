@@ -370,11 +370,11 @@ order by 3 asc
 
 </details>
 
-So we can conclude that **Snake Plant**, **Ponytail Palm** and **Peace Lil**y are least performant between the top-viewed products.
+So we can conclude that **Snake Plant**, **Ponytail Palm** and **Peace Lily** are least performant between the top-viewed products.
 
 #
 
-#### 6. Core datasets could include fact_orders, dim_products, and dim_users.
+#### 6. Core datasets could include fact_orders, dim_products, and dim_users
 
 • [f_orders](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/core/f_orders.sql)
 
@@ -385,7 +385,7 @@ So we can conclude that **Snake Plant**, **Ponytail Palm** and **Peace Lil**y ar
 
 #
 
-#### 7. The marketing mart could contain a model like user_order_facts which contains order information at the user level.
+#### 7. The marketing mart could contain a model like user_order_facts which contains order information at the user level
 
 ###### For those who are less familiar with e-commerce and marketing, we might want to dig into users — when was their first order? Last order? How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders
 
@@ -409,7 +409,7 @@ I have added 5 business lines in total:
 
 #
 
-#### 9. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense.
+#### 9. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
 
 ![Week 2 DAG](dag_week2.png "Week 2 DAG")
 
@@ -417,7 +417,7 @@ I have added 5 business lines in total:
 
 ---
 
-#### 1. We added some more models and transformed some data! Now we need to make sure they’re accurately reflecting the data. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above.
+#### 1. We added some more models and transformed some data! Now we need to make sure they’re accurately reflecting the data. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above
 
 I have added these standard tests to my models:
 
@@ -433,7 +433,7 @@ And some custom tests:
 
 ---
 
-#### 1. Run the product snapshot model using dbt snapshot and query it in snowflake to see how the data has changed since last week.
+#### 1. Run the product snapshot model using dbt snapshot and query it in snowflake to see how the data has changed since last week
 
 Comparing the tables before the run and after the run the number of rows changed from 30 to 34. So 4 products have changed the inventory.
 
