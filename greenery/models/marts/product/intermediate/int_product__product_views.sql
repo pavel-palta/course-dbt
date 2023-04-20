@@ -7,9 +7,8 @@
 
 select
   product_id,
-  count(order_id) as orders,
-  count(user_id) as users
+  count(distinct event_id) as views
 
-from {{ ref('int_core__order_items') }}
+from {{ ref('int_product__page_views') }}
 
 group by 1

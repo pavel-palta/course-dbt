@@ -5,9 +5,11 @@
 }}
 
 select
-  order_id,
   product_id,
+  order_id,
+  user_id,
   product,
-  ordered_at
+  ordered_at,
+  product_revenue
 
-from {{ ref('int_core__product_orders') }}
+from {{ ref('int_core__order_items') }}

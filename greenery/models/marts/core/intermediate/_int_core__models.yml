@@ -8,5 +8,11 @@ models:
   - name: int_core__users
     description: 'Intermediate table with joins on users'
 
-  - name: int_core__product_orders
+  - name: int_core__order_items
     description: 'Intermediate table with joins on products'
+
+  - name: int_core__product_orders
+    description: 'Order data on product level'
+
+  - name: int_core__user_orders
+    description: 'Data on purchasing users and their order activity'

@@ -3,3 +3,6 @@ version: 2
 models:
   - name: int_product__page_views
     description: 'Intermadiate table with page view events and supportive data'
+
+  - name: int_product__sessions
+    description: 'Intermideate table aggregatings sessions data on session_id level'

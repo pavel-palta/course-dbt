@@ -4,3 +4,6 @@ models:
 
   - name: f_page_views
     description: 'Page view events (product views) from the website'
+
+  - name: f_sessions
+    description: 'Data on sessions on the website'

@@ -11,7 +11,7 @@ select
   count(distinct order_id) as total_orders,
   sum(order_revenue) as total_revenue
 
-from {{ ref('f_orders') }}
+from {{ ref('int_core__orders') }}
 
 group by 1
 order by 1 asc

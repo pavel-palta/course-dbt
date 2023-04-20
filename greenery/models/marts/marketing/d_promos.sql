@@ -7,8 +7,9 @@
 select
   promo,
   status,
-  amount_discount
+  amount_discount,
+  total_promo_orders
 
-from {{ ref('stg_postgres__promos') }}
+from {{ ref('int_marketing__promos') }}
 
-order by status asc
+order by total_promo_orders desc

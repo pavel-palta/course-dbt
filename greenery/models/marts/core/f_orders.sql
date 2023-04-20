@@ -10,8 +10,6 @@ select
   order_status,
   order_revenue,
   order_discount,
-  product_revenue,
-  shipping_revenue,
   ordered_at,
   delivery_country,
   delivery_state,

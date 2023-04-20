@@ -7,6 +7,11 @@
 select
   product_id,
   product,
-  price
+  price,
+  total_users,
+  total_orders,
+  total_views
 
-from {{ ref('stg_postgres__products') }}
+from {{ ref('int_core__products') }}
+
+order by total_orders desc

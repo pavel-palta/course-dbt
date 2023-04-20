@@ -1,6 +1,6 @@
 select *
 
-from dev_db.dbt_pavelfilatovpaltacom.f_orders
+from {{ ref('f_orders') }}
 
 where 
   round(

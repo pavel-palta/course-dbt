@@ -10,7 +10,7 @@ select
   e.session_id,
   e.user_id,
   e.product_id,
-  e.created_at,
+  e.event_at,
   p.product
 
 from {{ ref('stg_postgres__events') }} as e

@@ -11,7 +11,7 @@ select
   order_id,
   product_id,
   event_type,
-  created_at,
+  created_at as event_at,
   page_url
 
 from {{ source('postgres', 'events') }}

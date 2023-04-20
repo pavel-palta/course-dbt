@@ -1,6 +1,6 @@
 select *
 
-from dev_db.dbt_pavelfilatovpaltacom.stg_postgres__orders
+from {{ ref('stg_postgres__orders') }}
 
 where 
   round(

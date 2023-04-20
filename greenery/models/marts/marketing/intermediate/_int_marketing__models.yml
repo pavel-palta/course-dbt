@@ -1,3 +1,6 @@
-# version: 2
+version: 2
 
-# models:
+models:
+
+  - name: int_marketing__promo_orders
+    description: 'An aggregate on orders with promotions per promo'
