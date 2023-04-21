@@ -377,7 +377,7 @@ So we can conclude that **Snake Plant**, **Ponytail Palm** and **Peace Lily** ar
 
 #### 9. Explain the product mart models you added. Why did you organize the models in the way you did?
 
-I have added 5 marts in total:
+I have added 4 marts in total:
 
 • **Core**: there we have 2 dim models on products and users, 2 fact models on orders and items. First 2 give us understanding on what we sell (what our portfolio is) and who we sell to. The last two give answers on questions how well we sell and what's been sold best;
 
@@ -391,7 +391,7 @@ I have added 5 marts in total:
 
 #### 9. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
 
-![Week 2 DAG](dag_week2.png "Week 2 DAG")
+![Week 2 DAG](week2_dag_screenshot.png "Week 2 DAG")
 
 ### Part 2. Tests
 
@@ -405,9 +405,9 @@ I have added these standard tests to my models:
 
 And some custom tests:
 
-• **Staging models**: two test on events table which check if [order_id](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/events_order_id.sql) and [product_id](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/events_product_id.sql) are not null for certain event types, test for [orders staging table](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/no_promo_order_revenues.sql) on revenue check for non discounted orders.
+• **Staging models**: two test on events table which check if [order_id](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/tst_events_order_id.sql) and [product_id](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/tst_events_product_id.sql) are not null for certain event types, test for [orders staging table](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/tst_no_promo_order_revenues.sql) on revenue check for non discounted orders, test on [one user_id per session](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/tst_one_session_per_user.sql).
 
-• **Marts**: [f_orders table test](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/order_revenues.sql) on how revenue numbers match.
+• **Marts**: f_orders table tests on [how revenue numbers match](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/tst_order_revenues.sql) and on [how prices match](https://github.com/pavel-palta/course-dbt/blob/main/greenery/tests/tst_product_revenue_price.sql).
 
 ### Part 3. Snapshots
 
@@ -420,11 +420,11 @@ Comparing the tables before the run and after the run the number of rows changed
 
 #### 2. Which products had their inventory change from week 1 to week 2? 
 
-• Pothos (40 → 20), 
+• Monstera (77 → 64), 
 
 • Philodendron (51 → 25), 
 
-• Monstera (77 → 64), 
+• Pothos (40 → 20), 
 
 • String of pearls (58 → 10)
 
@@ -435,40 +435,14 @@ Comparing the tables before the run and after the run the number of rows changed
 </br>
   
 ```sql
-with 
-
-  new_inventory_values as (
-
-    select 
-      product, 
-      inventory
-
-    from dev_db.dbt_pavelfilatovpaltacom.sst_postgres__products
-
-    where dbt_valid_from >= '2023-04-19'
-
-  ),
-
-  old_inventory_values as (
-
-    select 
-      product, 
-      inventory
-
-    from dev_db.dbt_pavelfilatovpaltacom.sst_postgres__products
-
-    where dbt_valid_from < '2023-04-19'
-  
-  )
-
 select
-  n.product,
-  o.inventory as old_inventory,
-  n.inventory as new_inventory
+  product,
+  previous_inventory,
+  current_inventory
 
-from new_inventory_values as n
-left join old_inventory_values as o
-  on n.product = o.product
+from dev_db.dbt_pavelfilatovpaltacom.d_inventory
+
+where updated_at > '2023-04-18'
 ```
   
 </details>
@@ -479,11 +453,11 @@ left join old_inventory_values as o
   
 </br>
   
-| PRODUCT             | OLD_INVENTORY | NEW_INVENTORY |
+| PRODUCT             | OLD_INVENTORY | NEW_INVENTORY  |
 | ------------------- | ------------- | -------------- |
-| Pothos              | 40            | 20             |
-| Philodendron        | 51            | 25             |
 | Monstera            | 77            | 64             |
+| Philodendron        | 51            | 25             |
+| Pothos              | 40            | 20             |
 | String of pearls    | 58            | 10             |
   
 </details>
