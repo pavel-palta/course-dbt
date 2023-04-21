@@ -5,10 +5,14 @@
 }}
 
 select
+  session_id,
   user_id,
-  first_session_at,
-  last_session_at,
+  start_at,
+  end_at,
   events,
-  sessions
+  length_seconds,
+  length_hours
 
-from {{ ref('int_product__user_sessions') }}
+from {{ ref('int_product__sessions') }}
+
+order by start_at desc

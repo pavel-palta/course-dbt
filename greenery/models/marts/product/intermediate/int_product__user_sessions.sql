@@ -7,11 +7,10 @@
 
 select
   user_id,
-  min(event_at) as first_session_at,
-  max(event_at) as last_session_at,
-  count(distinct event_id) as events,
-  count(distinct session_id) as sessions
+  avg(length_hours) as average_session_length_hours,
+  sum(events) as total_events,
+  count(distinct session_id) as total_sessions
 
-from {{ ref('stg_postgres__events') }}
+from {{ ref('int_product__sessions') }}
 
 group by 1

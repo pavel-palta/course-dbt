@@ -12,4 +12,6 @@ select
   event_at,
   product
 
-from {{ ref('int_product__page_views') }}
+from {{ ref('int_product__event_page_views') }}
+
+order by event_at desc

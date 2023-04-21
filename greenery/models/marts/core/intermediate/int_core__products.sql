@@ -9,12 +9,15 @@ select
   p.product_id,
   p.product,
   p.price,
-  o.orders as total_orders,
-  o.users as total_users,
-  v.views as total_views
+  e.total_views,
+  i.first_order_at,
+  i.last_order_at,
+  i.total_orders,
+  i.total_users,
+  i.total_units_sold
 
 from {{ ref('stg_postgres__products') }} as p
-left join {{ ref('int_core__product_orders') }} as o
-  on p.product_id = o.product_id
-left join {{ ref('int_product__product_views') }} as v
-  on p.product_id = v.product_id
+left join {{ ref('int_core__product_items') }} as i
+  on p.product_id = i.product_id
+left join {{ ref('int_product__product_page_views') }} as e
+  on p.product_id = e.product_id

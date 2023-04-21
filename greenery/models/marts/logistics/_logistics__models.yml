@@ -2,8 +2,11 @@ version: 2
 
 models:
 
-  - name: f_delayed_orders
-    description: 'Orders which have been delivered with a delay'
+  - name: d_addresses
+    description: 'Data mart on addresess & delivery stats'
 
-  - name: d_product_inventory
-    description: 'Product amounts left'
+  - name: d_inventory
+    description: 'Data mart on product inventory'
+
+  - name: f_delayed_orders
+    description: 'Data mart on delayed orders & their shipping data'

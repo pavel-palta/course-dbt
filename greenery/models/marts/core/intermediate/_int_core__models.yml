@@ -2,17 +2,23 @@ version: 2
 
 models:
 
+  - name: int_core__items
+    description: 'Intermediate table with joins on items'
+
+  - name: int_core__order_items
+    description: 'Intermediate table with items aggregated on order_id level'
+
   - name: int_core__orders
     description: 'Intermediate table with joins on orders'
 
-  - name: int_core__users
-    description: 'Intermediate table with joins on users'
+  - name: int_core__product_items
+    description: 'Intermediate table with items aggregated on product_id level'
 
-  - name: int_core__order_items
+  - name: int_core__products
     description: 'Intermediate table with joins on products'
 
-  - name: int_core__product_orders
-    description: 'Order data on product level'
-
   - name: int_core__user_orders
-    description: 'Data on purchasing users and their order activity'
+    description: 'Intermediate table with orders aggregated on user_id level'
+
+  - name: int_core__users
+    description: 'Intermediate table with joins on users'

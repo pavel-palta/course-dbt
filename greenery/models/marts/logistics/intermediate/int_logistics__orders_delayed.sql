@@ -1,6 +1,7 @@
 {{
   config(
-    enabled=true
+    enabled=true,
+    materialized='view'
   )
 }}
 
@@ -21,6 +22,6 @@ select
   estimated_days,
   delivery_days
 
-from {{ ref('int_logistics__orders_delayed') }}
+from {{ ref('int_core__orders') }}
 
-order by ordered_at desc
+where not is_delivered_in_time

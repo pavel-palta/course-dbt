@@ -1,3 +1,18 @@
-# version: 2
+version: 2
 
-# models:
+models:
+
+  - name: int_logistics__address_orders
+    description: 'Intermediate table with orders aggregated on address level'
+
+  - name: int_logistics__addresses
+    description: 'Intermediate table with joins on address'
+
+  - name: int_logistics__inventory
+    description: 'Intermediate table with joins on product inventory'
+
+  - name: int_logistics__orders_delayed
+    description: 'Intermediate table with orders which were delivered with delays'
+
+  - name: int_logistics__product_inventory
+    description: 'Intermediate table with inventory data aggregated on product level'

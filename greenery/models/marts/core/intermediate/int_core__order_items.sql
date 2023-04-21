@@ -6,15 +6,12 @@
 }}
 
 select
-  oi.product_id,
-  oi.order_id,
-  o.user_id,
-  p.product,
-  o.ordered_at,
-  o.product_revenue
+  order_id,
+  count(distinct product_id) as total_products,
+  array_agg(distinct product) within group (order by product) as products_list,
+  sum(units) as total_units,
+  sum(price) as total_price
 
-from {{ ref('stg_postgres__order_items') }} as oi
-left join {{ ref('stg_postgres__orders') }} as o
-  on oi.order_id = o.order_id
-left join {{ ref('stg_postgres__products') }} as p
-  on oi.product_id = p.product_id
+from {{ ref('int_core__items') }}
+
+group by 1

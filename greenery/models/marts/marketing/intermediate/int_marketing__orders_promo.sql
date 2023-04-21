@@ -1,6 +1,7 @@
 {{
   config(
-    enabled=true
+    enabled=true,
+    materialized='view'
   )
 }}
 
@@ -32,5 +33,4 @@ select
 
 from {{ ref('int_core__orders') }}
 
-order by ordered_at desc
-  
+where is_discounted

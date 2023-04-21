@@ -2,5 +2,11 @@ version: 2
 
 models:
 
+  - name: int_marketing__orders_promo
+    description: 'Intermediate table with orders which were discounted using promo'
+
   - name: int_marketing__promo_orders
-    description: 'An aggregate on orders with promotions per promo'
+    description: 'Intermediate table with orders aggregated on promo level'
+
+  - name: int_marketing__promos
+    description: 'Intermediate table with joins on promo'

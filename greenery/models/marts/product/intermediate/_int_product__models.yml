@@ -1,8 +1,17 @@
 version: 2
 
 models:
-  - name: int_product__page_views
-    description: 'Intermadiate table with page view events and supportive data'
+  - name: int_product__event_page_views
+    description: 'Intermediate table with event type page_view'
 
+  - name: int_product__events
+    description: 'Intermediate table with joins on events'
+
+  - name: int_product__product_page_views
+    description: 'Intermediate table with page view events aggregated on product_id level'
+  
   - name: int_product__sessions
-    description: 'Intermideate table aggregatings sessions data on session_id level'
+    description: 'Intermediate table with events aggregated on session_id level'
+
+  - name: int_product__user_sessions
+    description: 'Intermediate table with sessions aggregated on user_id level'

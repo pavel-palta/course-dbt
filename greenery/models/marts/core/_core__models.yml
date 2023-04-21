@@ -3,13 +3,13 @@ version: 2
 models:
 
   - name: d_products
-    description: 'Products portfolio'
+    description: 'Data mart on products & their popularity'
   
   - name: d_users
-    description: 'Data on users: coutry, orders, '
+    description: 'Data mart on users & their order stats'
+
+  - name: f_items
+    description: 'Data mart on ordered items & their prices'
 
   - name: f_orders
-    description: 'Data on orders: purchases'
-
-  - name: f_product_orders
-    description: 'Data on products ordered'
+    description: 'Data mart on orders & their revenue'

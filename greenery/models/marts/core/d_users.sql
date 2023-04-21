@@ -13,13 +13,13 @@ select
   zip,
   first_order_at,
   last_order_at,
-  first_session_at,
-  last_session_at,
   total_orders,
+  total_orders_in_time,
   total_revenue,
-  total_events,
-  total_sessions
+  total_discount,
+  average_delivery_days,
+  total_units
 
 from {{ ref('int_core__users') }}
 
-order by total_orders desc
+order by total_revenue desc

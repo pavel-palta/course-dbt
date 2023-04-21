@@ -3,7 +3,7 @@ version: 2
 models:
 
   - name: f_page_views
-    description: 'Page view events (product views) from the website'
+    description: 'Data mart on page views & products'
 
   - name: f_sessions
-    description: 'Data on sessions on the website'
+    description: 'Data sessions & their length'
