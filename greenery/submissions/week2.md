@@ -21,29 +21,13 @@
 </br>
   
 ```sql
-with 
-
-  user_orders as (
-
-    select
-      user_id,
-      count(distinct order_id) as count_orders,
-      iff(count_orders > 1, true, false) as is_returning_user
-    
-    from dev_db.dbt_pavelfilatovpaltacom.stg_postgres__orders
-    
-    group by 1
-    order by 1 asc
-
-  )
-
 select
-  count(distinct user_id) as count_users,
-  count(distinct iff(is_returning_user, user_id, null)) as count_returning_users,
-  div0(count_returning_users, count_users) * 100 as rate_repeat,
+  count(distinct iff(total_orders > 0, user_id, null)) as count_ordering_users,
+  count(distinct iff(total_orders > 1, user_id, null)) as count_returning_users,
+  div0(count_returning_users, count_ordering_users) * 100 as rate_repeat,
   round(rate_repeat, 0) as rate_repeat_rounded_0
   
-from user_orders
+from dev_db.dbt_pavelfilatovpaltacom.d_users
 ```
   
 </details>
@@ -54,9 +38,9 @@ from user_orders
   
 </br>
   
-| COUNT_USERS | COUNT_RETURNING_USERS | RATE_REPEAT | RATE_REPEAT_ROUNDED_0 |
-| ----------- | --------------------- | ----------- | --------------------- |
-| 124         | 99                    | 79.8387     | 80                    |
+| COUNT_ORDERING_USERS | COUNT_RETURNING_USERS | RATE_REPEAT | RATE_REPEAT_ROUNDED_0 |
+| -------------------- | --------------------- | ----------- | --------------------- |
+| 124                  | 99                    | 79.8387     | 80                    |
   
 </details>
 
@@ -98,8 +82,6 @@ If I had more data I would look into:
 
 • [Logistics](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/logistics)
 
-• [Finance](https://github.com/pavel-palta/course-dbt/tree/main/greenery/models/marts/finance)
-
 #
 
 #### 5. The product mart could contain a model like fact_page_views which contains all page view events from greenery’s events data
@@ -121,7 +103,7 @@ daily_views_product as (
 
   select
     product,
-    date(created_at) as report_date,
+    date(event_at) as report_date,
     count(distinct event_id) as views
   
   from dev_db.dbt_pavelfilatovpaltacom.f_page_views
@@ -206,7 +188,7 @@ daily_product_orders as (
     date(ordered_at) as report_date,
     count(distinct order_id) as orders
   
-  from dev_db.dbt_pavelfilatovpaltacom.f_product_orders
+  from dev_db.dbt_pavelfilatovpaltacom.f_items
 
   group by 1, 2
   order by 2 desc, 1 asc
@@ -279,7 +261,7 @@ daily_views_product as (
 
   select
     product,
-    date(created_at) as report_date,
+    date(event_at) as report_date,
     count(distinct event_id) as views
   
   from dev_db.dbt_pavelfilatovpaltacom.f_page_views
@@ -315,7 +297,7 @@ daily_product_orders as (
     date(ordered_at) as report_date,
     count(distinct order_id) as orders
   
-  from dev_db.dbt_pavelfilatovpaltacom.f_product_orders
+  from dev_db.dbt_pavelfilatovpaltacom.f_items
 
   group by 1, 2
   order by 2 desc, 1 asc
@@ -389,23 +371,21 @@ So we can conclude that **Snake Plant**, **Ponytail Palm** and **Peace Lily** ar
 
 ###### For those who are less familiar with e-commerce and marketing, we might want to dig into users — when was their first order? Last order? How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders
 
-• [d_user_orders](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/marketing/d_user_orders.sql): there are first_order_at, last_order_at, total_orders, total_cost attributes in the model.
+• [int_core__user_orders](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/core/intermediate/int_core__user_orders.sql): there are first_order_at, last_order_at, total_orders, total_revenue attributes in the model.
 
 #
 
 #### 9. Explain the product mart models you added. Why did you organize the models in the way you did?
 
-I have added 5 business lines in total:
+I have added 5 marts in total:
 
-• **Core**: there we have 2 dim models on products and users, 2 fact models on orders and product orders. First 2 give us understanding on what we sell and who we sell to. The last two give answers on questions how well we sell and what's been sold best;
+• **Core**: there we have 2 dim models on products and users, 2 fact models on orders and items. First 2 give us understanding on what we sell (what our portfolio is) and who we sell to. The last two give answers on questions how well we sell and what's been sold best;
 
-• **Finance**: I haven't added anything there yet but I am thinking of getting advantage of costs data and put some data on our margins there;
+• **Logistics**: 2 dim models on addresses and our product inventory where we use the snapshot data, also a fact model with delayed orders for logistics purposes;
 
-• **Logistics**: a dim model on product inventory which shows what products we have now and fact model on orders which have been delivered with delays;
+• **Marketing**: a dim model on promos with some stats, a fact model on orders which used the promocode for marketing purposes;
 
-• **Marketing**: a dim model on users with aggregated data from orders, a dim model on promos and a fact model on orders which have a promocode;
-
-• **Product**: a fact model on page views which we can use to evaluate popularity of each procuct on our website.
+• **Product**: 2 fact models on page views and sessions, the most undeveloped mart because there could be more tables like on add carts, funnels. Maybe later will do
 
 #
 
