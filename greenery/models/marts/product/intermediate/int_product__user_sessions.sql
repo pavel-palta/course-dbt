@@ -7,7 +7,7 @@
 
 select
   user_id,
-  avg(length_hours) as average_session_length_hours,
+  round(avg(length_hours), 2) as average_session_length_hours,
   sum(events) as total_events,
   count(distinct session_id) as total_sessions
 
