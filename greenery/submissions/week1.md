@@ -220,7 +220,7 @@ with
   events_hourly as (
 
     select
-      date_trunc(hour, created_at) as created_hour,
+      date_trunc(hour, event_at) as created_hour,
       count(distinct event_id) as count_events,
       count(distinct session_id) as count_sessions
     
