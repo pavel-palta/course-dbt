@@ -12,7 +12,8 @@ select
   o.ordered_at,
   p.product,
   i.units,
-  p.price
+  p.price as unit_price,
+  p.price * i.units as price
 
 from {{ ref('stg_postgres__items') }} as i
 left join {{ ref('stg_postgres__orders') }} as o
