@@ -27,7 +27,7 @@ models:
         tests:
           - not_null
 
-  - name: stg_postgres_items
+  - name: stg_postgres__items
     description: 'Ordered items: order ID, product ID and quantity ordered'
     columns:
       - name: units
