@@ -159,6 +159,8 @@ Here is the macro with role granting [grant_role](https://github.com/pavel-palta
 
 ### Part 4. dbt Packages
 
+---
+
 I've added two packages to my project: **dbt_utils** and **dbt_expectations**, see [packages.yml](https://github.com/pavel-palta/course-dbt/blob/main/greenery/packages.yml).
 
 One of the macros from **dbt_utils** I found useful is **generate_surrogate_key** which I used for creating a unique key for [staging items model](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/staging/postgres/stg_postgres__items.sql#L8).
