@@ -4,16 +4,17 @@
   )
 }}
 
+{%- set event_types = get_event_types() -%}
+
 select
   session_id,
   user_id,
   start_at,
   end_at,
   events,
-  page_view_events,
-  add_to_cart_events,
-  checkout_events,
-  package_shipped_events,
+  {%- for event_type in event_types %}
+  {{event_type}}_events,
+  {%- endfor %}
   length_seconds,
   length_hours
 
