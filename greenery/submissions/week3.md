@@ -22,7 +22,7 @@
 select
   count(distinct session_id) as count_sessions,
   count(distinct iff(checkout_events >0, session_id, null)) as count_sessions_checkout, 
-  count_sessions / count_sessions_checkout * 100 as rate_conversion,
+  count_sessions_checkout / count_sessions * 100 as rate_conversion,
   round(rate_conversion, 0) as rate_conversion_rounded_0
 
 from dev_db.dbt_pavelfilatovpaltacom.f_sessions
@@ -115,41 +115,56 @@ order by 4 desc
 
 #### 3. Question to think about: Why might certain products be converting at higher/lower rates than others? We don't actually have data to properly dig into this, but we can make some hypotheses.
 
-- appealing design, photos and descriptions of a product
+- appealing design, photos and descriptions of a product;
 
-- ratins and reviews, external and on the website
+- ratins and reviews, external and on the website;
 
-- product availability
+- product availability;
 
-- price/value rate as well as competitors' prices
+- price/value rate as well as competitors' prices;
 
-- promocodes for certain products
+- promocodes for certain products;
 
-- shipping, guarantee and return policies
+- shipping, guarantee and return policies;
 
-- order appearance in catalogue layout
+- order appearance in catalogue layout;
 
-- advertising, posts in social media and influencers promotions
+- advertising, posts in social media and influencers promotions;
 
-- overall hype over a certain product
+- overall hype over a certain product.
 
+</br>
 
-### Part 2. dbt Macros. 
-
----
-
-### Part 3. Granting permissions. 
+### Part 2. dbt Macros
 
 ---
 
-### Part 4. dbt Packages. 
+I have found a good use case on using macros to simplify the way I do counts on event_type.
+Here is a marco [get_event_types](https://github.com/pavel-palta/course-dbt/blob/main/greenery/macros/get_event_types.sql) which gets hardcoded values for event types: this can also be dynamic but I've skipped that for now.
+And in these two models [int_product__sessions](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/product/intermediate/int_product__sessions.sql) and [f_sessions](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/product/f_sessions.sql) I'm looping the counts for each event type in the set.
+
+Sure thing there are some cases where they can be used too but that seemed a little like overkill for now :)
+
+</br>
+
+### Part 3. Granting permissions
 
 ---
 
-### Part 5. Improved a DAG. 
+Here is the macro with role granting [grant_role](https://github.com/pavel-palta/course-dbt/blob/main/greenery/macros/grant_role.sql) and the post-hook implementation in [dbt_project](https://github.com/pavel-palta/course-dbt/blob/564b84b854a05d7320d232ec63a83845117aa1e9/greenery/dbt_project.yml#L30). How it works:
+
+![Week 3 role_granting](week3_grant_role_reporting.png "Week 2 Role Granting")
+
+</br>
+
+### Part 4. dbt Packages
 
 ---
 
-### Part 6. dbt Snapshots. 
+### Part 5. Improved a DAG
+
+---
+
+### Part 6. dbt Snapshots
 
 ---
