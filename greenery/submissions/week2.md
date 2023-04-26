@@ -435,6 +435,10 @@ Comparing the tables before the run and after the run the number of rows changed
 </br>
   
 ```sql
+
+-- note: this query may show different results
+-- if you're running it days after the date in where
+
 select
   product,
   previous_inventory,
