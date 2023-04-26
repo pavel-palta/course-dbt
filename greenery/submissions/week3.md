@@ -195,7 +195,7 @@ DAG from week 3:
 
 ![Week 3 DAG](week3_dag_screenshot.png "Week 3 DAG")
 
-
+</br>
 
 ### Part 6. dbt Snapshots
 
