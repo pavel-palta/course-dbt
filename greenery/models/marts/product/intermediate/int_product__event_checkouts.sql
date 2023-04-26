@@ -9,10 +9,9 @@ select
   event_id,
   session_id,
   user_id,
-  product_id,
-  product,
+  order_id,
   event_at
 
 from {{ ref('int_product__events') }}
 
-where event_type = 'page_view'
+where event_type = 'checkout'

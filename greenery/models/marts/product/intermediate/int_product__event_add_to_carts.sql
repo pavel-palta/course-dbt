@@ -15,4 +15,4 @@ select
 
 from {{ ref('int_product__events') }}
 
-where event_type = 'page_view'
+where event_type = 'add_to_cart'

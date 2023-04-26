@@ -1,6 +1,16 @@
 version: 2
 
 models:
+
+  - name: int_product__event_add_to_carts
+    description: 'Intermediate table with event type add_to_cart'
+    
+  - name: int_product__event_checkouts
+    description: 'Intermediate table with event type checkout'
+
+  - name: int_product__event_package_shipped
+    description: 'Intermediate table with event type package_shipped'
+
   - name: int_product__event_page_views
     description: 'Intermediate table with event type page_view'
 
