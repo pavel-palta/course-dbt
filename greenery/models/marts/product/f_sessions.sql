@@ -10,6 +10,10 @@ select
   start_at,
   end_at,
   events,
+  page_view_events,
+  add_to_cart_events,
+  checkout_events,
+  package_shipped_events,
   length_seconds,
   length_hours
 
