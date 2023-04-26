@@ -159,11 +159,41 @@ Here is the macro with role granting [grant_role](https://github.com/pavel-palta
 
 ### Part 4. dbt Packages
 
+I've added two packages to my project: **dbt_utils** and **dbt_expectations**, see [packages.yml](https://github.com/pavel-palta/course-dbt/blob/main/greenery/packages.yml).
+
+One of the macros from **dbt_utils** I found useful is **generate_surrogate_key** which I used for creating a unique key for [staging items model](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/staging/postgres/stg_postgres__items.sql#L8).
+
+Another thing which I found useful is **group_by** macros which I used in [event aggregate on sessions](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/marts/product/intermediate/int_product__sessions.sql#L24) (even though it wasn't really necessary).
+
+I haven't found any obvious use-cases now for **dbt_expectations** since I covered with tests pretty much everything I wanted at [week 2](https://github.com/pavel-palta/course-dbt/blob/main/greenery/submissions/week2.md#part-2-tests), though there was one test **expect_column_distinct_values_to_equal_set** which I used to check distinct values of event_type in [stg_postgres__events](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/staging/postgres/_stg_postgres__models.yml#L32) and get a warning in case we have new ones.
+
+</br>
+
+### Part 5. Improved DAG
+
 ---
 
-### Part 5. Improved a DAG
+<details>
 
----
+<summary> Old DAG (hidden)</summary>
+  
+</br>
+  
+DAG from week 2:
+
+</br>
+
+![Week 2 DAG](week2_dag_screenshot.png "Week 2 DAG")
+  
+</details>
+
+DAG from week 3:
+
+</br>
+
+![Week 3 DAG](week3_dag_screenshot.png "Week 3 DAG")
+
+
 
 ### Part 6. dbt Snapshots
 
