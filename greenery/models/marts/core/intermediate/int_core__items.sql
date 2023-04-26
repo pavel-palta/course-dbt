@@ -6,6 +6,7 @@
 }}
 
 select
+  i.item_id,
   i.product_id,
   i.order_id,
   o.user_id,

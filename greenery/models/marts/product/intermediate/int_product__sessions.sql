@@ -21,4 +21,4 @@ select
 
 from {{ ref('stg_postgres__events') }}
 
-group by 1, 2
+{{ dbt_utils.group_by(n=2) }}

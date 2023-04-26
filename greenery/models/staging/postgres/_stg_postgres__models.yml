@@ -26,6 +26,11 @@ models:
       - name: page_url
         tests:
           - not_null
+      - name: event_type
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_distinct_values_to_equal_set:
+              value_set: ['page_view', 'add_to_cart', 'checkout', 'package_shipped']
 
   - name: stg_postgres__items
     description: 'Ordered items: order ID, product ID and quantity ordered'

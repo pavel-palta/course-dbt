@@ -5,6 +5,7 @@
 }}
 
 select
+  item_id,
   product_id,
   order_id,
   user_id,
