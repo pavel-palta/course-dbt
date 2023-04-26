@@ -168,3 +168,58 @@ Here is the macro with role granting [grant_role](https://github.com/pavel-palta
 ### Part 6. dbt Snapshots
 
 ---
+
+Seems like we've run out of **String of pearls** and **Pothos**!
+
+• ZZ Plant (89 → 53), 
+
+• Monstera (64 → 50), 
+
+• Bamboo (56 → 44), 
+
+• Philodendron (25 → 15)
+
+• String of pearls (10 → 0), 
+
+• Pothos (20 → 0)
+
+<details>
+  
+<summary>Query</summary>
+  
+</br>
+  
+```sql
+
+-- note: this query may show different results
+-- if you're running it days after the date in where
+
+select
+  product,
+  previous_inventory,
+  current_inventory
+
+from dev_db.dbt_pavelfilatovpaltacom.d_inventory
+
+where updated_at > '2023-04-26'
+```
+  
+</details>
+
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+  
+| PRODUCT           | PREVIOUS_INVENTORY | CURRENT_INVENTORY |
+|-------------------|--------------------|--------------------|
+| ZZ Plant          | 89                 | 53                 |
+| Monstera          | 64                 | 50                 |
+| Bamboo            | 56                 | 44                 |
+| Philodendron      | 25                 | 15                 |
+| String of pearls  | 10                 | 0                  |
+| Pothos            | 20                 | 0                  |
+  
+</details>
+
