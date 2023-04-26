@@ -115,9 +115,9 @@ order by 4 desc
 
 #### 3. Question to think about: Why might certain products be converting at higher/lower rates than others? We don't actually have data to properly dig into this, but we can make some hypotheses.
 
-- appealing design, photos and descriptions of a product;
+- appealing design, quality of photos and descriptions of a product;
 
-- ratins and reviews, external and on the website;
+- ratings and reviews, external and on the website;
 
 - product availability;
 
