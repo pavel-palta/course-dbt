@@ -17,6 +17,9 @@ models:
   - name: int_product__events
     description: 'Intermediate table with joins on events'
 
+  - name: int_product__product_funnels
+    description: 'Intermediate table with conversions in sessions'
+
   - name: int_product__product_page_views
     description: 'Intermediate table with page view events aggregated on product_id level'
   

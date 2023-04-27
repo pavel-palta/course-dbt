@@ -2,8 +2,8 @@ version: 2
 
 models:
 
-  - name: f_add_to_carts
-    description: 'Data mart on add to cart events'
+  - name: d_product_funnels
+    description: 'Data mart on product funnels'
 
   - name: f_page_views
     description: 'Data mart on page views & products'
