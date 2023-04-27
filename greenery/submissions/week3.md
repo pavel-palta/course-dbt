@@ -54,18 +54,10 @@ from dev_db.dbt_pavelfilatovpaltacom.f_sessions
   
 ```sql
 select
-  pv.product,
-  count(distinct pv.session_id) as count_sessions,
-  count(distinct iff(s.checkout_events > 0, s.session_id, null)) as count_sessions_checkout,
-  concat(round(count_sessions_checkout / count_sessions * 100, 0), ' %') as rate_conversion
+  product,
+  concat(round(rate_view_to_checkout * 100, 0), ' %') as rate_conversion
   
-
-from dev_db.dbt_pavelfilatovpaltacom.f_page_views as pv
-left join dev_db.dbt_pavelfilatovpaltacom.f_sessions as s
-  on pv.session_id = s.session_id
-
-group by 1
-order by 4 desc
+from dev_db.dbt_pavelfilatovpaltacom.d_product_funnels
 ```
   
 </details>
@@ -75,42 +67,41 @@ order by 4 desc
 <summary>Result</summary>
   
 </br>
-  
-| PRODUCT              | COUNT_SESSIONS | COUNT_SESSIONS_CHECKOUT | RATE_CONVERSION |
-|----------------------|----------------|-------------------------|-----------------|
-| Fiddle Leaf Fig      | 56             | 50                      | 89%             |
-| String of pearls     | 64             | 57                      | 89%             |
-| Monstera             | 49             | 43                      | 88%             |
-| ZZ Plant             | 63             | 55                      | 87%             |
-| Cactus               | 55             | 47                      | 85%             |
-| Bamboo               | 67             | 56                      | 84%             |
-| Calathea Makoyana    | 53             | 44                      | 83%             |
-| Spider Plant         | 59             | 49                      | 83%             |
-| Majesty Palm         | 67             | 55                      | 82%             |
-| Ponytail Palm        | 70             | 55                      | 79%             |
-| Dragon Tree          | 62             | 49                      | 79%             |
-| Arrow Head           | 63             | 50                      | 79%             |
-| Money Tree           | 56             | 44                      | 79%             |
-| Rubber Plant         | 54             | 42                      | 78%             |
-| Snake Plant          | 73             | 56                      | 77%             |
-| Devil's Ivy          | 45             | 34                      | 76%             |
-| Bird of Paradise     | 60             | 45                      | 75%             |
-| Pilea Peperomioides  | 59             | 44                      | 75%             |
-| Philodendron         | 62             | 46                      | 74%             |
-| Angel Wings Begonia  | 61             | 45                      | 74%             |
-| Pothos               | 61             | 45                      | 74%             |
-| Birds Nest Fern      | 78             | 57                      | 73%             |
-| Orchid               | 75             | 55                      | 73%             |
-| Peace Lily           | 66             | 48                      | 73%             |
-| Pink Anthurium       | 74             | 54                      | 73%             |
-| Ficus                | 68             | 49                      | 72%             |
-| Boston Fern          | 63             | 45                      | 71%             |
-| Jade Plant           | 46             | 32                      | 70%             |
-| Alocasia Polly       | 51             | 34                      | 67%             |
-| Aloe Vera            | 65             | 43                      | 66%             |
+
+| PRODUCT                | RATE_CONVERSION |
+|------------------------|-----------------|
+| String of pearls       | 61 %            |
+| Arrow Head             | 56 %            |
+| Cactus                 | 55 %            |
+| ZZ Plant               | 54 %            |
+| Bamboo                 | 54 %            |
+| Rubber Plant           | 52 %            |
+| Monstera               | 51 %            |
+| Calathea Makoyana      | 51 %            |
+| Fiddle Leaf Fig        | 50 %            |
+| Majesty Palm           | 49 %            |
+| Aloe Vera              | 49 %            |
+| Devil's Ivy            | 49 %            |
+| Philodendron           | 48 %            |
+| Jade Plant             | 48 %            |
+| Pilea Peperomioides    | 47 %            |
+| Spider Plant           | 47 %            |
+| Dragon Tree            | 47 %            |
+| Money Tree             | 46 %            |
+| Orchid                 | 45 %            |
+| Bird of Paradise       | 45 %            |
+| Ficus                  | 43 %            |
+| Birds Nest Fern        | 42 %            |
+| Pink Anthurium         | 42 %            |
+| Boston Fern            | 41 %            |
+| Alocasia Polly         | 41 %            |
+| Peace Lily             | 41 %            |
+| Ponytail Palm          | 40 %            |
+| Snake Plant            | 40 %            |
+| Angel Wings Begonia    | 39 %            |
+| Pothos                 | 34 %            |
 
 
-  
 </details>
 
 #### 3. Question to think about: Why might certain products be converting at higher/lower rates than others? We don't actually have data to properly dig into this, but we can make some hypotheses.
@@ -165,7 +156,7 @@ I've added two packages to my project: **dbt_utils** and **dbt_expectations**, s
 
 One of the macros from **dbt_utils** I found useful is **generate_surrogate_key** which I used for creating a unique key for [staging items model](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/staging/postgres/stg_postgres__items.sql#L8).
 
-Another thing which I found useful is **group_by** macros which I used in [event aggregate on sessions](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/marts/product/intermediate/int_product__sessions.sql#L24) (even though it wasn't really necessary).
+Another thing which I found useful is **group_by** macros which I used in [event aggregate on sessions](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/marts/product/intermediate/int_product__sessions.sql#L24) and [product funnels]([https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/marts/product/intermediate/int_product__sessions.sql#L24](https://github.com/pavel-palta/course-dbt/blob/ed345e70a3eab73065ed1b3b9f57f43ea93bea33/greenery/models/marts/product/intermediate/int_product__product_funnels.sql#L25)) (even though it wasn't really necessary).
 
 I haven't found any obvious use-cases now for **dbt_expectations** since I covered with tests pretty much everything I wanted at [week 2](https://github.com/pavel-palta/course-dbt/blob/main/greenery/submissions/week2.md#part-2-tests), though there was one test **expect_column_distinct_values_to_equal_set** which I used to check distinct values of event_type in [stg_postgres__events](https://github.com/pavel-palta/course-dbt/blob/2dddae40310ec22e1138da9782cdf69219b236ad/greenery/models/staging/postgres/_stg_postgres__models.yml#L32) and get a warning in case we have new ones.
 
