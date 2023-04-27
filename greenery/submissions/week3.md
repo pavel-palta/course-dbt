@@ -21,7 +21,7 @@
 ```sql
 select
   count(distinct session_id) as count_sessions,
-  count(distinct iff(checkout_events >0, session_id, null)) as count_sessions_checkout, 
+  count(distinct iff(checkout_events > 0, session_id, null)) as count_sessions_checkout, 
   count_sessions_checkout / count_sessions * 100 as rate_conversion,
   round(rate_conversion, 0) as rate_conversion_rounded_0
 
