@@ -10,9 +10,136 @@
 
 #### 1. Which products had their inventory change from week 3 to week 4?
 
+Last week we ran out of **String of pearls** and **Pothos** but seems like've purchased some more!
+
+• ZZ Plant (53 → 41), 
+
+• Monstera (50 → 31), 
+
+• Philodendron (15 → 30), 
+
+• Bamboo (44 → 23)
+
+• Pothos (0 → 20), 
+
+• String of pearls (0 → 10)
+
+<details>
+  
+<summary>Query</summary>
+  
+</br>
+  
+```sql
+-- note: this query may show different results
+-- if you're running it days after the date in where
+
+select
+  product,
+  previous_inventory,
+  current_inventory
+
+from dev_db.dbt_pavelfilatovpaltacom.d_inventory
+
+where updated_at > '2023-05-02'
+```
+  
+</details>
+
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+  
+| PRODUCT            | PREVIOUS_INVENTORY | CURRENT_INVENTORY |
+|--------------------|--------------------|--------------------|
+| ZZ Plant           | 53                 | 41                 |
+| Monstera           | 50                 | 31                 |
+| Philodendron       | 15                 | 30                 |
+| Bamboo             | 44                 | 23                 |
+| Pothos             | 0                  | 20                 |
+| String of pearls   | 0                  | 10                 |
+  
+</details>
+
 #### 2. Which products had the most fluctuations in inventory?
 
+Monstera, String of pearls, Pothos and Philodendron had the most fluctuations — their inventory changed 3 times!
+
+<details>
+  
+<summary>Query</summary>
+  
+</br>
+  
+```sql
+select
+  product,
+  count(distinct dbt_scd_id) - 1 as count_fluctuations
+
+from dev_db.dbt_pavelfilatovpaltacom.sst_postgres__products
+
+group by 1
+
+having count_fluctuations > 0
+
+order by 2 desc
+```
+  
+</details>
+
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+  
+| PRODUCT            | COUNT_FLUCTUATIONS |
+|--------------------|--------------------|
+| Monstera           | 3                  |
+| String of pearls   | 3                  |
+| Pothos             | 3                  |
+| Philodendron       | 3                  |
+| ZZ Plant           | 2                  |
+| Bamboo             | 2                  |
+  
+</details>
+
 #### 3. Did we have any items go out of stock in the last 3 weeks?
+
+Yep, at week 3 we ran out of **String of pearls** and **Pothos**.
+
+<details>
+  
+<summary>Query</summary>
+  
+</br>
+  
+```sql
+select distinct
+  product,
+  date(dbt_updated_at) as updated_date
+
+from dev_db.dbt_pavelfilatovpaltacom.sst_postgres__products
+
+where inventory = 0
+```
+  
+</details>
+
+<details>
+  
+<summary>Result</summary>
+  
+</br>
+  
+| PRODUCT            | UPDATED_DATE |
+|--------------------|--------------|
+| Pothos             | 2023-04-26   |
+| String of pearls   | 2023-04-26   |
+  
+</details>
 
 ### Part 2. Modeling
 
