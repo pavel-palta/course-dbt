@@ -149,6 +149,8 @@ where inventory = 0
 
 Here is a dashboard [Greenery Funnel Dashboard](https://app.sigmacomputing.com/corise-dbt/workbook/Funnel-Dashboard-Pavel-Filatov-10UhSfnb4DjB04SfOib04W) which answers all these questions!
 
+![Week 4 Dashboard](week4_dashboard.png "Week 4 Dashboard")
+
 #### 2. Exposure on my product analytics model which refers the dashboard:
 
 ![Week 4 Exposure](week4_exposure.png "Week 4 Exposure")
