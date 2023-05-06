@@ -16,9 +16,10 @@ select
   {%- for event_type in event_types %}
   count(distinct iff(event_type = '{{event_type}}', event_id, null)) as {{event_type}}_events,
   {%- endfor %}
+  array_agg(distinct product) as products,
   timediff(second, start_at, end_at) as length_seconds,
   round(length_seconds / 3600, 2) as length_hours
 
-from {{ ref('stg_postgres__events') }}
+from {{ ref('int_product__events') }}
 
 {{ dbt_utils.group_by(n=2) }}

@@ -15,6 +15,7 @@ select
   {%- for event_type in event_types %}
   {{event_type}}_events,
   {%- endfor %}
+  products,
   length_seconds,
   length_hours
 

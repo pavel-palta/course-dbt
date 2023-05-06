@@ -8,5 +8,8 @@ models:
   - name: f_page_views
     description: 'Data mart on page views & products'
 
+  - name: f_session_products
+    description: 'A mapping table between sessions and products'
+
   - name: f_sessions
     description: 'Data sessions & their length'
