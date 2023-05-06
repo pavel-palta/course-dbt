@@ -11,6 +11,7 @@ select
   session_id,
   user_id,
   state,
+  is_greenery_employee,
   min(event_at) as start_at,
   max(event_at) as end_at,
   count(distinct event_id) as events,
@@ -22,4 +23,4 @@ select
 
 from {{ ref('int_product__events') }}
 
-{{ dbt_utils.group_by(n=3) }}
+{{ dbt_utils.group_by(n=4) }}

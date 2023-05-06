@@ -12,6 +12,7 @@ select
   s.start_at,
   v.product as product,
   s.state,
+  s.is_greenery_employee,
   count(distinct v.event_id) as page_views,
   count(distinct a.event_id) as add_to_carts,
   count(distinct c.event_id) as checkouts,
@@ -27,4 +28,4 @@ left join {{ ref('int_product__event_checkouts') }} as c
   on s.session_id = c.session_id and
      a.event_id is not null
 
-{{ dbt_utils.group_by(n=6) }}
+{{ dbt_utils.group_by(n=7) }}

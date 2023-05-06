@@ -7,6 +7,7 @@
 select
   session_id,
   user_id,
+  is_greenery_employee,
   state,
   start_at,
   product,
