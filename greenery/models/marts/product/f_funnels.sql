@@ -4,17 +4,15 @@
   )
 }}
 
-{%- set event_types = get_event_types() -%}
-
 select
   session_id,
   user_id,
   state,
-  product,
   start_at,
+  product,
   page_views,
   add_to_carts,
-  checkouts
+  is_conversion
 
 from {{ ref('int_product__funnels') }}
 

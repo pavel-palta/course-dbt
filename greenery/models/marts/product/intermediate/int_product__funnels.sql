@@ -14,7 +14,8 @@ select
   s.state,
   count(distinct v.event_id) as page_views,
   count(distinct a.event_id) as add_to_carts,
-  count(distinct c.event_id) as checkouts
+  count(distinct c.event_id) as checkouts,
+  (checkouts > 0) as is_conversion
 
 from {{ ref('int_product__sessions') }} as s
 left join {{ ref('int_product__event_page_views') }} as v
