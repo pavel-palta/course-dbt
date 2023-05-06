@@ -2,12 +2,15 @@ version: 2
 
 exposures:  
   - name: funnel_dashboard
+    type: dashboard
+    url: https://app.sigmacomputing.com/corise-dbt/workbook/Funnel-Dashboard-Pavel-Filatov-10UhSfnb4DjB04SfOib04W
     description: >
       Greenery Funnel Dashboard
-    type: dashboard
     maturity: high
+    
+    depends_on:
+      - ref('f_funnels')
+    
     owner:
       name: Pavel Filatov
       email: pavel.filatov@palta.com
-    depends_on:
-      - ref('f_funnels')
