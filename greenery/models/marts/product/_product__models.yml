@@ -5,8 +5,14 @@ models:
   - name: d_product_funnels
     description: 'Data mart on product funnels'
 
+  - name: f_add_to_carts
+    description: 'Data mart on add to carts & products'
+
   - name: f_checkouts
-    description: 'Data mart on checkouts & products'
+    description: 'Data mart on checkouts'
+
+  - name: f_funnels
+    description: 'Data mart on product funnels'
 
   - name: f_page_views
     description: 'Data mart on page views & products'

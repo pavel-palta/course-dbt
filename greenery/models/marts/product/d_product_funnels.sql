@@ -7,9 +7,9 @@
 select
   product_id,
   product,
-  page_views,
-  add_to_carts,
-  checkouts,
+  total_page_views,
+  total_add_to_carts,
+  total_checkouts,
   rate_view_to_cart,
   rate_cart_to_checkout,
   rate_view_to_checkout
