@@ -1,0 +1,13 @@
+version: 2
+
+exposures:  
+  - name: funnel_dashboard
+    description: >
+      Greenery Funnel Dashboard
+    type: dashboard
+    maturity: high
+    owner:
+      name: Pavel Filatov
+      email: pavel.filatov@palta.com
+    depends_on:
+      - ref('f_funnels')
