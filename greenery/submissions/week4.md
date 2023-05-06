@@ -145,17 +145,15 @@ where inventory = 0
 
 ---
 
-#### 1. How are our users moving through the product funnel?
+#### 1. How are our users moving through the product funnel? Which steps in the funnel have largest drop off points?
 
-Additional models I created to answer this question is
+Here is a dashboard [Greenery Funnel Dashboard](https://app.sigmacomputing.com/corise-dbt/workbook/Funnel-Dashboard-Pavel-Filatov-10UhSfnb4DjB04SfOib04W) which answers all these questions!
 
-#### 2. Which steps in the funnel have largest drop off points?
+#### 2. Exposure on my product analytics model which refers the dashboard:
 
-Additional models I created to answer this question is
+![Week 4 Exposure](week4_exposure.png "Week 4 Exposure")
 
-#### 3. Exposure on my product analytics model:
-
-dashboard on Sigma is here sigma workbook
+Exposures for product marts can be found [here](https://github.com/pavel-palta/course-dbt/blob/main/greenery/models/marts/product/_product__exposures.yml).
 
 ### Part 3. Reflections
 
