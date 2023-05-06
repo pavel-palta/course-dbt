@@ -33,4 +33,4 @@ left join {{ ref('stg_postgres__users') }} as u
 left join {{ ref('stg_postgres__addresses') }} as a
   on u.address_id = a.address_id
 left join {{ ref('stg_postgres__orders') }} as o
-  on e.product_id = p.product_id
+  on e.order_id = o.order_id

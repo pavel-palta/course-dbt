@@ -9,7 +9,8 @@ select
   event_id,
   session_id,
   user_id,
-  order_id,
+  product_id,
+  product,
   event_at
 
 from {{ ref('int_product__events') }}
